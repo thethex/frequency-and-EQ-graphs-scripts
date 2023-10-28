@@ -11,15 +11,18 @@ with open(wavelet) as w, open(pattern) as p,open(squiged,"w") as s:
 
   wave_content = w.readline().split(';')
 
-  #MEASURES = list([map(float, line.split('\t')) for line in m.readlines()])
+  # Output frequency will be between this and the previous index
+  wave_i=1 #wavelet next index
 
-  print(wave_content)
-
-  wave_i=0
-
+  # i-1
   linew=wave_content[0].split(' ');
   freqw=float(linew[1])
   floatw=float(linew[2])
+
+  # i
+  linewi=wave_content[wave_i].split(' ');
+  freqwi=float(linewi[1])
+  floatwi=float(linewi[2])
 
   for linep in p:
     lineps = linep.strip().split(",")
@@ -28,13 +31,24 @@ with open(wavelet) as w, open(pattern) as p,open(squiged,"w") as s:
 
     # If current  pattern frequency is higher than wavelet frequency, go to next wavelet frequency.
     # Added security, you can't overflow wavelet content.
-    if((freqp>freqw) and wave_i<(len(wave_content)-1)):
+    if((freqp>freqwi) and wave_i<(len(wave_content)-1)):
+
+      # index-1 = index
+      freqw=freqwi
+      floatw=floatwi
+
+      # index = index+1
       wave_i+=1
-      linew=wave_content[wave_i].split(" ")
+      linewi=wave_content[wave_i].split(" ")
+      freqwi=float(linewi[1])
+      floatwi=float(linewi[2])
 
-    freqw=float(linew[1])
-    floatw=float(linew[2])
+    # Calculate the output frequency.
+    # To do so we calculate the equation of the line going through the 2 wavelet index coordinate
+    # And then deduce the Y value corresponding to the x frequency
+    # We then add this value to the template value (0).
 
-    floatr=floatp+floatw
-    print("{} + {}:'{}'".format(floatp,floatw,floatr))
+    floatr= floatp+(((freqp-freqw)*((floatwi-floatw)/(freqwi-freqw)))+floatw)
+
+    print("value template {} + calc wavelet value at frequency {} = '{}'".format(floatp,freqp,floatr))
     s.write("{},{}\n".format(freqp,floatw))
