@@ -1,12 +1,12 @@
 import sys
 
-print("USE : python convert_wavelet_response.py /PATH/TO/your_wavelet_graphic_EQ_file.txt /PATH/TO/your_second_wavelet_graphic_EQ_file.txt ")
+print("USE : python add_wavelet_wavelet.py /PATH/TO/your_wavelet_graphic_EQ_file.txt /PATH/TO/your_second_wavelet_graphic_EQ_file.txt ")
 
 wavelet_a = sys.argv[1]
 wavelet_b = sys.argv[2]
 
 
-with open(wavelet_a) as wa, open(wavelet_b) as wb,open(wavelet_a.replace(".txt",".squiged.txt") +"_plus_"+wavelet_b,"w") as o:
+with open(wavelet_a) as wa, open(wavelet_b) as wb,open(wavelet_a.replace(".txt","") +"_plus_"+wavelet_b,"w") as o:
 
     res="GraphicEQ:"
     la=wa.readline().strip().split(":")[1].split(";")

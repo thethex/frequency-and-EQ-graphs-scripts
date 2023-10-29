@@ -28,13 +28,17 @@ Add two Wavelet Graphical EQ together:
 ```python
 python add_wavelet_wavelet.py /PATH/TO/your_wavelet_graphic_EQ_file.txt /PATH/TO/your_second_wavelet_graphic_EQ_file.txt
 ```
-Creates a converted file `/PATH/TO/your_wavelet_graphic_EQ_file_plus_your_second_wavelet_graphic_EQ_file.txt`
+Creates a Wavelet file `/PATH/TO/your_wavelet_graphic_EQ_file_plus_your_second_wavelet_graphic_EQ_file.txt`
 
 ### add_response_response
 
+Add two Squig Frequency Response files together:
+
 ```python
-python add_response_response.py
+python add_wavelet_wavelet.py /PATH/TO/your_frequency_response_file.txt /PATH/TO/your_second_frequency_response_file.txt
 ```
+Creates a Wavelet file `/PATH/TO/your_frequency_response_file_plus_your_second_frequency_response_file.txt`
+
 
 ### add_wavelet_response
 
@@ -51,10 +55,14 @@ It can be used to calculate the difference between to Frequency Responses. Or ap
 
 ### diff_wavelet_wavelet
 
+### sub_response_response
 
+Calculate difference between two Squig Frequency Response files:
 
-### diff_response_response
-
+```python
+python sub_response_response.py /PATH/TO/your_frequency_response_file.txt /PATH/TO/your_frequency_response_file_to_substract.txt
+```
+Creates a Wavelet file `/PATH/TO/sub_your_frequency_response_file.txt_with_your_frequency_response_file_to_substract.txt`
 
 ## Convert scripts
 
